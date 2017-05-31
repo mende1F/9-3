@@ -10,13 +10,16 @@ public class Server{
 	try{
 	    Socket socket = s.accept();
 	    try{
-		System.out.println("接続されました。");
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
-		while(true){
-		    String str = in.readLine();
-		    if(str.equals("END")) break;
-		}
+		System.out.println("接続されました。");
+		System.out.println("以下の5体のモンスターの中から3体を選択してください。");
+		Game.list();
+		Game.select();
+		Game.check();
+		String str = in.readLine();
+		if(str.equals("END")) out.println(str);
+		System.out.println("対戦を開始します。");
 	    }finally{
 		System.out.println("対戦を終了します。");
 		socket.close();

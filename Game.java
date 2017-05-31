@@ -2,6 +2,12 @@ import java.io.*;
 
 public class Game{
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void list(){
+	for(int i=0; i<5; i++){                            
+	    Monster a = new Monster(i);
+	    System.out.println("No."+(i+1)+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
+	}
+    }
     public static void select(){
 	int[] sel = new int[3]; //選択したモンスターのNoを格納する配列
 	for(int i=0; i<3; i++){
