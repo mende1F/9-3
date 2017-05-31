@@ -1,5 +1,3 @@
-# HelloGit
-# 9-3
-exp-Software  
-test,test  
-branch
+# ソフトウェア制作9-3
+
+五行思想をもとにしたモンスター対戦ゲーム。
