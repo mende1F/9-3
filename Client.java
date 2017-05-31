@@ -12,7 +12,7 @@ public class Client{
 	    System.out.println("接続されました。");
 	    System.out.println("以下の5体のモンスターの中から3体を選択してください。");
 	    Game.list();
-	    Game.select(); //モンスターNoの入力及び選択モンスターの確認を行う関数
+	    Game.select();
 	    Game.check();
 	    out.println("END");
 	    String str = in.readLine();
