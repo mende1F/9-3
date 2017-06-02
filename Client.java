@@ -13,7 +13,19 @@ public class Client{
 	    System.out.println("以下の5体のモンスターの中から3体を選択してください。");
 	    Start.list();
 	    Start.select();
-	    Start.check();
+	    int[] mysel = new int[3]; //自分の選んだモンスターの番号を格納する配列
+	    int rest = 3;
+	    mysel = Start.check();
+	    System.out.println("あなたの選んだモンスター:");
+	    Monster[] mymons = new Monster[3];
+	    for(int i=0; i<3; i++){
+		mymons[i] = new Monster(mysel[i]-1);
+		System.out.println(mymons[i].name);
+	    }
+	    for(int i=0; i<3; i++){
+		String s = String.valueOf(mysel[i]);
+		out.println(s);
+	    }
 	    out.println("END");
 	    String str = in.readLine();
 	    System.out.println("対戦を開始します。");

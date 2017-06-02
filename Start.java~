@@ -39,7 +39,7 @@ public class Start{
 	    }
 	}
 	for(int i=0; i<3; i++){
-	    Monster a = new Monster(sel[i]-1);
+	    Monster a = new Monster(sel[i]);
 	    System.out.println("No."+(sel[i])+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
 	}
 	System.out.println("この3体でよろしいですか？(yes/no)");

@@ -1,7 +1,7 @@
 public class Monster{
     String name,type;
     int hp,atk,def,spd;
-    boolean spatk;
+    boolean spatk,alive;
     String[] nameArray = {"mons1","mons2","mons3","mons4","mons5"};
     String[] typeArray = {"water","wood","fire","earth","metal"};
     int[] hpArray = {300,400,200,250,250};
@@ -16,5 +16,6 @@ public class Monster{
 	def = defArray[i];
 	spd = spdArray[i];
 	spatk = true;
+	alive = false;
     }
 }
