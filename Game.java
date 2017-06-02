@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Game{
+public class Start{
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     /*5体のモンスターを表示する*/
     public static void list(){
@@ -42,12 +42,12 @@ public class Game{
 	    Monster a = new Monster(sel[i]-1);
 	    System.out.println("No."+(sel[i])+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
 	}
+	System.out.println("この3体でよろしいですか？(yes/no)");
     }
 
     /*選択したモンスターで良いか確認する*/
     public static void check(){ //
 	try{
-	    System.out.println("この3体でよろしいですか？(yes/no)");
 	    String line = reader.readLine();
 	    System.out.println("");
 	    while(true){

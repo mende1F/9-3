@@ -11,9 +11,9 @@ public class Client{
 	    PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 	    System.out.println("接続されました。");
 	    System.out.println("以下の5体のモンスターの中から3体を選択してください。");
-	    Start.list();
-	    Start.select();
-	    Start.check();
+	    Game.list();
+	    Game.select();
+	    Game.check();
 	    out.println("END");
 	    String str = in.readLine();
 	    System.out.println("対戦を開始します。");
