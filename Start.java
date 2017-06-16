@@ -75,7 +75,7 @@ public class Start{
 	}
     }
     
-    /*選択したモンスターを返す*/
+    /*引数が1ならServer側、2ならClient側のモンスター一覧配列を返す*/
     public static int[] getMonsters(int player){
 	if(player == 1){
 	    return Ssel;
@@ -84,12 +84,12 @@ public class Start{
 	}
     }
     
-    /*プレイヤー1の選択したモンスターを表示する*/
+    /*プレイヤー1(Server)の選択したモンスターを表示する*/
     public static void show1(){
 	for(int i=0; i<3; i++) System.out.println(Ssel[i]);
     }
    
-    /*プレイヤー2の選択したモンスターを表示する*/
+    /*プレイヤー2(Client)の選択したモンスターを表示する*/
     public static void show2(){
 	for(int i=0; i<3; i++) System.out.println(Csel[i]);
     }
