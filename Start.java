@@ -3,6 +3,8 @@ import java.io.*;
 public class Start{
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static int[] sel = new int[3];  //選択したモンスターのNoを格納する配列
+    static int[] Ssel = new int[3];
+    static int[] Csel = new int[3];
     /*5体のモンスターを表示する*/
     public static void list(){
 	for(int i=0; i<5; i++){                            
@@ -46,7 +48,7 @@ public class Start{
     }
 
     /*選択したモンスターで良いか確認する*/
-    public static int[] check(){ //
+    public static void check(int player){ //
 	try{
 	    String line = reader.readLine();
 	    System.out.println("");
@@ -66,6 +68,29 @@ public class Start{
 	}catch(IOException e){
 	    System.out.println(e);
 	}
-	return sel;
+	if(player == 1){
+	    for(int i=0; i<3; i++) Ssel[i] = sel[i];
+	}else if(player == 2){
+	    for(int i=0; i<3; i++) Csel[i] = sel[i];
+	}
+    }
+    
+    /*選択したモンスターを返す*/
+    public static int[] getMonsters(int player){
+	if(player == 1){
+	    return Ssel;
+	}else{
+	    return Csel;
+	}
+    }
+    
+    /*プレイヤー1の選択したモンスターを表示する*/
+    public static void show1(){
+	for(int i=0; i<3; i++) System.out.println(Ssel[i]);
+    }
+   
+    /*プレイヤー2の選択したモンスターを表示する*/
+    public static void show2(){
+	for(int i=0; i<3; i++) System.out.println(Csel[i]);
     }
 }

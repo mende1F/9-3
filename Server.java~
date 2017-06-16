@@ -16,20 +16,21 @@ public class Server{
 		System.out.println("以下の5体のモンスターの中から3体を選択してください。");
 		Start.list();
 		Start.select();
-		int mysel[] = new int[3];
-		mysel = Start.check();
+		Start.check(1);
+		int[] Ssel = new int[3];
+		int[] Csel = new int[3];
+		Ssel = Start.getMonsters(1);
+		for(int i=0; i<3; i++){
+		    Start.Csel[i] = Integer.parseInt(in.readLine());
+		}
+		for(int i=0; i<3; i++){
+		    String mysel = String.valueOf(Ssel[i]);
+		    out.println(mysel);
+		}
 		System.out.println("あなたの選んだモンスター:");
-		for(int i=0; i<3; i++){
-		    mymons[i] = new Monster(mysel[i]-1);
-		    System.out.println(mymons[i].name);
-		}
+		Start.show1();
 		System.out.println("相手の選んだモンスター");
-		Monster[] oppmons = new Monster[3];
-		for(int i=0; i<3; i++){
-		    int oppsel = Integer.parseInt(in.readLine());
-		    oppmons[i] = new Monster(oppsel-1);		    
-		    System.out.println(oppmons[i].name);
-		}
+		Start.show2();
 		String str = in.readLine();
 		if(str.equals("END")) out.println(str);
 		System.out.println("対戦を開始します。");
