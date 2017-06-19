@@ -13,28 +13,55 @@ public class Server{
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 		System.out.println("接続されました。");
-		System.out.println("以下の5体のモンスターの中から3体を選択してください。");
-		Start.list();
-		Start.select();
-		Start.check(1);
+		Start.list();//モンスターの表示
+		Start.select();//モンスターの選択
+		Start.check(1);//選択モンスターの確認
 		int[] Ssel = new int[3];
 		int[] Csel = new int[3];
 		Ssel = Start.getMonsters(1);
-		for(int i=0; i<3; i++){
-		    Start.Csel[i] = Integer.parseInt(in.readLine());
-		}
-		for(int i=0; i<3; i++){
-		    String mysel = String.valueOf(Ssel[i]);
-		    out.println(mysel);
-		}
-		System.out.println("あなたの選んだモンスター:");
+		for(int i=0; i<3; i++) Start.Csel[i] = Integer.parseInt(in.readLine());
+		for(int i=0; i<3; i++) out.println(String.valueOf(Ssel[i]));
 		Start.show1();
-		System.out.println("相手の選んだモンスター");
 		Start.show2();
 		System.out.println("");
 		String str = in.readLine();
-		if(str.equals("END")) out.println(str);
-		System.out.println("対戦を開始します。");
+		if(str.equals("DONE")) out.println(str);
+		Battle.begin();
+		int Scom,Ccom;
+		int opcur;
+		int i=1;
+		int flag;
+		int randA,randB;
+		while(true){
+		    System.out.println("------ターン"+i+"------");
+		    Scom = Battle.command(1);
+		    Ccom = Integer.parseInt(in.readLine());
+		    out.println(String.valueOf(Scom));
+		    randA = (int)Math.random()*100; //同じspd同士の攻撃順序決定に使用
+		    randB = (int)Math.random()*100; //同じtype同士のダメージ倍率決定に使用
+		    out.println(String.valueOf(randA));
+		    out.println(String.valueOf(randB));
+		    flag = Battle.battle(Scom,Ccom,1,randA,randB);
+		    if(flag == -1){ //相手モンスターを倒した場合
+			str = in.readLine(); //相手の選択したモンスターの番号を受信
+			if(str.equals("END")){ //相手の控えが0
+			    System.out.println("あなたの勝ちです！！\n");
+			    break;
+			}else{
+			    Battle.Ccur = Integer.parseInt(str);
+			    Battle.showCcur();
+			}
+		    }else if(flag>=0 && flag<=2){ //交換する場合相手にモンスター番号を送信
+			out.println(String.valueOf(flag));
+			Battle.showScur();
+		    }else if(flag==-10){
+			System.out.println("あなたの負けです...\n");
+			out.println("END");
+			break;
+		    }
+		    i++;
+		    System.out.println("");
+		}
 	    }finally{
 		System.out.println("対戦を終了します。");
 		socket.close();
@@ -42,6 +69,10 @@ public class Server{
 	}finally{
 	    s.close();
 	}
+    }
+    
+    public static void outmons(){
+	
     }
 }
 						       

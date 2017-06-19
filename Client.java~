@@ -18,12 +18,8 @@ public class Client{
 	    int[] Ssel = new int[3];
 	    int[] Csel = new int[3];
 	    Csel = Start.getMonsters(2);
-	    for(int i=0; i<3; i++){
-		String mysel = String.valueOf(Csel[i]);
-		out.println(mysel);
-	    }
-	    for(int i=0; i<3; i++){
-		Start.Ssel[i] = Integer.parseInt(in.readLine());
+	    for(int i=0; i<3; i++) out.println(String.valueOf(Csel[i]));
+	    for(int i=0; i<3; i++) Start.Ssel[i] = Integer.parseInt(in.readLine());
 	    System.out.println("あなたの選んだモンスター");
 	    Start.show2();
 	    System.out.println("相手の選んだモンスター");
@@ -32,6 +28,9 @@ public class Client{
 	    out.println("END");
 	    String str = in.readLine();
 	    System.out.println("対戦を開始します。");
+	    Battle.battle();
+	    int Ccommand = Battle.command(2);
+	    out.println(String.valueof(command));
 	}finally{
 	    System.out.println("対戦を終了します。");
 	    socket.close();

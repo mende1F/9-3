@@ -7,6 +7,7 @@ public class Start{
     static int[] Csel = new int[3];
     /*5体のモンスターを表示する*/
     public static void list(){
+	System.out.println("以下の5体のモンスターの中から3体を選択してください。");
 	for(int i=0; i<5; i++){                            
 	    Monster a = new Monster(i);
 	    System.out.println("No."+(i+1)+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
@@ -75,7 +76,7 @@ public class Start{
 	}
     }
     
-    /*引数が1ならServer側、2ならClient側のモンスター一覧配列を返す*/
+    /*引数が0ならServer側、1ならClient側のモンスター一覧配列を返す*/
     public static int[] getMonsters(int player){
 	if(player == 1){
 	    return Ssel;
@@ -84,13 +85,15 @@ public class Start{
 	}
     }
     
-    /*プレイヤー1(Server)の選択したモンスターを表示する*/
+    /*プレイヤー(Server)の選択したモンスター番号を表示する*/
     public static void show1(){
+	System.out.println("プレイヤー1の選択したモンスター");
 	for(int i=0; i<3; i++) System.out.println(Ssel[i]);
     }
    
-    /*プレイヤー2(Client)の選択したモンスターを表示する*/
+    /*プレイヤー2(Client)の選択したモンスター番号を表示する*/
     public static void show2(){
+	System.out.println("プレイヤー2の選択したモンスター");
 	for(int i=0; i<3; i++) System.out.println(Csel[i]);
     }
 }

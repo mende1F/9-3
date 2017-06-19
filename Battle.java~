@@ -1,0 +1,93 @@
+import java.io.*;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class Battle{
+    static int[] Ssel = new int[3];
+    static int[] Csel = new int[3];
+    static Monster[] Smons = new Monster[3];
+    static Monster[] Cmons = new Monster[3];
+    static int Scur=0,Ccur=0,Srest=2,Crest=2;
+    static int Sexch=0,Cexch=0; 
+    public static void begin(){
+	Ssel = Start.getMonsters(1);
+	Csel = Start.getMonsters(2);
+	for(int i=0; i<3; i++){
+	    Smons[i] = new Monster(Ssel[i]-1);
+	}
+	Scur = Ssel[0];
+	for(int i=0; i<3; i++){
+	    Cmons[i] = new Monster(Csel[i]-1);
+	}
+	Ccur = Csel[0];
+	System.out.println("対戦を開始します。");
+	System.out.println(Smons[0].name +" VS "+ Cmons[0].name);
+}
+    public static int command(int p){
+	System.out.println("プレイヤー"+p+"はどうする？");
+	System.out.println("1.通常攻撃　2.特殊攻撃　3.交換");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	int command=0;
+	try{
+	    command = Integer.parseInt(reader.readLine());
+	    switch(command){
+	    case 1:
+		normalAtk();
+		return command;
+	    case 2:
+		specialAtk();
+		return command;
+	    case 3:
+		if(p==1){
+		    Sexch = exchange();
+		    return Sexch+10;
+		}else{
+		    Cexch = exchange();
+		    return Cexch+10;
+		}
+	    default:
+		break;
+	    }
+	}catch(IOException e){
+	    System.out.println(e);
+	}
+	return command;
+    }
+    
+    public static void battle(int Scom, int Ccom){
+	if(Scom>10){
+	    System.out.println("プレイヤー1は"+Smons[Scur].name+"を引っ込めて、"+Smons[Sexch].name+"を繰り出した！");
+	}
+    }
+    public static int exchange(){
+	System.out.println("交換したいモンスターを選択してください。");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	for(int i=0; i<3; i++){
+	    if(Ssel[i]!=Scur){
+		System.out.println(Ssel[i]+". "+Smons[i].name+" TYPE:"+Smons[i].type+" HP:"+Smons[i].hp+" ATK:"+Smons[i].atk+" DEF:"+Smons[i].def+" SPD:"+Smons[i].spd+"\n");
+	    }
+	}
+	int exch=0;
+	try{
+	    exch = Integer.parseInt(reader.readLine());
+	}catch(IOException e){
+	    System.out.println(e);
+	}
+	return exch;
+    }
+    public static void normalAtk(){
+	System.out.println("通常攻撃!");
+    }
+    public static void specialAtk(){
+	System.out.println("特殊攻撃!");
+    }
+}
+	

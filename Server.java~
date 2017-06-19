@@ -31,9 +31,11 @@ public class Server{
 		Start.show1();
 		System.out.println("相手の選んだモンスター");
 		Start.show2();
+		System.out.println("");
 		String str = in.readLine();
 		if(str.equals("END")) out.println(str);
 		System.out.println("対戦を開始します。");
+		Battle.battle();
 	    }finally{
 		System.out.println("対戦を終了します。");
 		socket.close();

@@ -4,7 +4,7 @@ public class Monster{
     boolean spatk;
     String[] nameArray = {"mons1","mons2","mons3","mons4","mons5"};
     String[] typeArray = {"water","wood","fire","earth","metal"};
-    int[] hpArray = {300,400,200,250,250};
+    int[] hpArray = {200,100,200,250,250};
     int[] atkArray = {100,120,150,100,180};
     int[] defArray = {150,80,60,100,150};
     int[] spdArray = {50,30,80,20,40};

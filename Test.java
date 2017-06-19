@@ -1,0 +1,16 @@
+import java.io.*;
+
+public class Test{
+    static Monster[] a = new Monster[3];
+    public static void main(String[] args){
+	for(int i=0; i<3; i++){
+	    a[i] = new Monster(i);
+	}
+	show();
+    }
+    private static void show(){
+	for(int i=0; i<3; i++){
+	    System.out.println(a[i].name);
+	}
+    }
+}
