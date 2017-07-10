@@ -1,3 +1,5 @@
+package g9_3;
+
 import java.io.*;
 import java.net.*;
 
@@ -28,15 +30,14 @@ public class Client{
 	    int opcur;
 	    int i=1;
 	    int flag;
-	    int randA,randB;
+	    int randA;
 	    while(true){
 		System.out.println("------ターン"+i+"------");
 		Ccom = Battle.command(2);
 		out.println(String.valueOf(Ccom));
 		Scom = Integer.parseInt(in.readLine());
 		randA = Integer.parseInt(in.readLine());
-		randB = Integer.parseInt(in.readLine());
-		flag = Battle.battle(Scom,Ccom,2,randA,randB);
+		flag = Battle.battle(Scom,Ccom,2,randA);
 		if(flag == -1){
 		    str = in.readLine();
 		    if(str.equals("END")){
@@ -46,7 +47,7 @@ public class Client{
 			Battle.Scur = Integer.parseInt(str);
 			Battle.showScur();
 		    }
-		}else if(flag>-1){
+		}else if(flag>=0 && flag<=2){
 		    out.println(String.valueOf(flag));
 		    Battle.showCcur();
 		}else if(flag==-10){

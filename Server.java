@@ -1,3 +1,5 @@
+package g9_3;
+
 import java.io.*;
 import java.net.*;
 
@@ -31,17 +33,15 @@ public class Server{
 		int opcur;
 		int i=1;
 		int flag;
-		int randA,randB;
+		int randA;
 		while(true){
 		    System.out.println("------ターン"+i+"------");
 		    Scom = Battle.command(1);
 		    Ccom = Integer.parseInt(in.readLine());
 		    out.println(String.valueOf(Scom));
 		    randA = (int)Math.random()*100; //同じspd同士の攻撃順序決定に使用
-		    randB = (int)Math.random()*100; //同じtype同士のダメージ倍率決定に使用
 		    out.println(String.valueOf(randA));
-		    out.println(String.valueOf(randB));
-		    flag = Battle.battle(Scom,Ccom,1,randA,randB);
+		    flag = Battle.battle(Scom,Ccom,1,randA);
 		    if(flag == -1){ //相手モンスターを倒した場合
 			str = in.readLine(); //相手の選択したモンスターの番号を受信
 			if(str.equals("END")){ //相手の控えが0
@@ -69,10 +69,6 @@ public class Server{
 	}finally{
 	    s.close();
 	}
-    }
-    
-    public static void outmons(){
-	
     }
 }
 						       

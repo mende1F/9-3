@@ -1,21 +1,21 @@
+package g9_3;
 import java.io.*;
 
-public class Start{
+class Start{
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static int[] sel = new int[3];  //選択したモンスターのNoを格納する配列
     static int[] Ssel = new int[3];
     static int[] Csel = new int[3];
     /*5体のモンスターを表示する*/
-    public static void list(){
+    static void list(){
 	System.out.println("以下の5体のモンスターの中から3体を選択してください。");
 	for(int i=0; i<5; i++){                            
-	    Monster a = new Monster(i);
-	    System.out.println("No."+(i+1)+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
+	    Monster.showMonsters(i);
 	}
     }
 
     /*プレイヤーにモンスターを3体選択させる*/
-    public static void select(){
+    static void select(){
 	for(int i=0; i<3; i++){
 	    System.out.println((i+1)+"体目のNoを入力してください。");
 	    outer: while(true){
@@ -23,7 +23,7 @@ public class Start{
 		    int n = Integer.parseInt(reader.readLine());
 		    sel[i] = n;
 		    System.out.println("");
-		    if(n > 5){
+		    if(n < 1 || n > 5){
 			System.out.println("Noは1〜5の間で入力してください。");
 			continue;
 		    }
@@ -45,25 +45,25 @@ public class Start{
 	    Monster a = new Monster(sel[i]-1);
 	    System.out.println("No."+(sel[i])+" "+a.name+" TYPE:"+a.type+" HP:"+a.hp+" ATK:"+a.atk+" DEF:"+a.def+" SPD:"+a.spd+"\n");
 	}
-	System.out.println("この3体でよろしいですか？(yes/no)");
     }
 
     /*選択したモンスターで良いか確認する*/
-    public static void check(int player){ //
+    static void check(int player){
+	String line;
 	try{
-	    String line = reader.readLine();
 	    System.out.println("");
 	    while(true){
-		if(!((line.equals("yes"))||(line.equals("no")))){
-		    System.out.println("yesかnoで答えてください。");
-		}else if(line.equals("no")){
+		System.out.println("この3体でよろしいですか？(y/n)");
+		line = reader.readLine();
+		if(!((line.equals("y"))||(line.equals("n")))){
+		    System.out.println("yかnで答えてください。");
+		}else if(line.equals("n")){
 		    System.out.println("もう一度選択し直してください。");
 		    Start.select();
-		}else if(line.equals("yes")){
+		}else if(line.equals("y")){
 		    System.out.println("相手の選択を待っています。");
 		    break;
 		}
-		line = reader.readLine();
 		System.out.println("");
 	    }
 	}catch(IOException e){
@@ -77,7 +77,7 @@ public class Start{
     }
     
     /*引数が0ならServer側、1ならClient側のモンスター一覧配列を返す*/
-    public static int[] getMonsters(int player){
+    static int[] getMonsters(int player){
 	if(player == 1){
 	    return Ssel;
 	}else{
@@ -86,14 +86,16 @@ public class Start{
     }
     
     /*プレイヤー(Server)の選択したモンスター番号を表示する*/
-    public static void show1(){
+    static void show1(){
 	System.out.println("プレイヤー1の選択したモンスター");
-	for(int i=0; i<3; i++) System.out.println(Ssel[i]);
+	for(int i=0; i<3; i++) System.out.print(Ssel[i]+"  ");
+	System.out.println("");
     }
    
     /*プレイヤー2(Client)の選択したモンスター番号を表示する*/
-    public static void show2(){
+    static void show2(){
 	System.out.println("プレイヤー2の選択したモンスター");
-	for(int i=0; i<3; i++) System.out.println(Csel[i]);
+	for(int i=0; i<3; i++) System.out.print(Csel[i]+"  ");
+	System.out.println("");
     }
 }
