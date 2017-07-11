@@ -1,4 +1,5 @@
 package g9_3;
+
 import java.io.*;
 
 class Battle{
@@ -23,15 +24,7 @@ class Battle{
     }
 
     static int command(int p){
-	if(p == 1){
-	    System.out.println("       "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
-	    System.out.println("        VS");
-	    System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp);
-	}else{
-	    System.out.println("       "+Smons[Scur].name+" HP:"+Smons[Scur].hp);
-	    System.out.println("        VS");
-	    System.out.println(Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
-	}	
+	show_battle(p);
 	System.out.println("プレイヤー"+p+"はどうする？");
 	if(p==1 && Smons[Scur].spatk==false){
 	    System.out.println("1.通常攻撃　3.交換");
@@ -91,7 +84,7 @@ class Battle{
 	    defr.hp -= dmg;
 	    System.out.println("プレイヤー"+pdef+"の"+defr.name+"に"+dmg+"のダメージ！\n");
 	    if(defr.hp>0){
-	    System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp+" VS "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+		show_battle(p);
 	    }else{
 		/*どちらかのモンスターが倒れたときの交換は通信を伴うので、状況毎に異なる戻り値を返す。
 		  プレイヤーは自分のモンスターが倒れたら交換し、そのモンスター番号を返す。
@@ -122,7 +115,7 @@ class Battle{
 	    atkr.hp += dmg;
 	    System.out.println("プレイヤー"+patk+"の"+atkr.name+"に"+(-dmg)+"のダメージ！");
 	    if(atkr.hp>0){
-		System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp+" VS "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+		show_battle(p);
 	    }else{
 		System.out.println(0);
 		if(patk==1){
@@ -181,15 +174,15 @@ class Battle{
     static int battle(int Scom, int Ccom,int p, double randA){
 	int flag=3; //ダメージ計算結果をmain関数に返し、その後の処理を分岐させる
 	/*プレイヤー1が交換する場合*/
-	if(Scom>10){
+	if(Scom>=10){
 	    System.out.println("プレイヤー1は"+Smons[Scur].name+"を引っ込めて、"+Smons[Scom-10].name+"を繰り出した！");
 	    Scur = Scom-10;
-	    System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp+" VS "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+	    show_battle(p);
 	    /*プレイヤー2も交換する場合*/
-	    if(Ccom>10){
+	    if(Ccom>=10){
 		System.out.println("プレイヤー2は"+Cmons[Ccur].name+"を引っ込めて、"+Cmons[Ccom-10].name+"を繰り出した！");
 		Ccur = Ccom-10;
-		System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp+" VS "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+		shoq_battle(p);
 	    }
 	    /*プレイヤー2は攻撃する場合*/
 	    else{
@@ -199,10 +192,10 @@ class Battle{
 	/*プレイヤー1が攻撃する場合*/
 	else{ 
 	    /*プレイヤー2は交換する場合*/
-	    if(Ccom>10){
+	    if(Ccom>=10){
 		System.out.println("プレイヤー2は"+Cmons[Ccur].name+"を引っ込めて、"+Cmons[Ccom-10].name+"を繰り出した！");
 		Ccur = Ccom-10;
-		System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp+" VS "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+		show_battle(p);
 		flag = calc_damage(Smons[Scur],Cmons[Ccur],Scom-1,p);
 	    }
 	    /*プレイヤー2も攻撃する場合、お互いのスピードを比較して攻撃順序を決定*/
@@ -283,6 +276,17 @@ class Battle{
     static void showCcur(){
 	System.out.println("プレイヤー2は"+Cmons[Ccur].name+"を繰り出した！");
 	System.out.println("");
+    }
+    static void show_battle(int p){
+	if(p == 1){
+	    System.out.println("       "+Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+	    System.out.println("        VS");
+	    System.out.println(Smons[Scur].name+" HP:"+Smons[Scur].hp);
+	}else{
+	    System.out.println("       "+Smons[Scur].name+" HP:"+Smons[Scur].hp);
+	    System.out.println("        VS");
+	    System.out.println(Cmons[Ccur].name+" HP:"+Cmons[Ccur].hp);
+	}
     }
 }
 	
